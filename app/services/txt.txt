@@ -1,0 +1,1 @@
+aqui Contém a configuração e chamadas do Firebase (Dados).
