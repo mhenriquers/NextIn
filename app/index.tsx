@@ -7,7 +7,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.texto}>base code</Text>
+      <Text style={styles.texto}>NextIn</Text>
     </View>
   );
 }
@@ -22,5 +22,7 @@ const styles = StyleSheet.create({
   texto: {
     fontSize: 20,
     fontWeight: 'bold',
+    position: 'absolute',
+    top: 10,
   },
 });
