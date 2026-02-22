@@ -1,1 +1,1 @@
-aqui Contém os arquivos de Estilização. Ex: homeStyles.js.
+styles/ → estilos separados

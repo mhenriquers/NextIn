@@ -1,1 +1,1 @@
-aqui Contém peças reutilizáveis (Botões customizados, Cards de clientes).
+components/ → peças reutilizáveis (botões, cards…)
