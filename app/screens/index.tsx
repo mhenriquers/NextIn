@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ImageBackground,
   TextInput,
+  Image
 } from "react-native";
 
 // estrutura do app
@@ -21,6 +22,9 @@ export default function App() {
           <ImageBackground source={require("../assets/images/login-bg.jpg")}
           style={styles.fundoBox}
           >
+            <Image source={require('../assets/images/perfil.png')}
+            style={styles.imgPerfil}
+            />
             <Text style={styles.login}>Login</Text>
             <TextInput
               placeholder="Usuário"
@@ -89,5 +93,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontWeight: "bold",
     color: '#FFF',
+  },
+
+  imgPerfil:{
+    width:80,
+    height: 80,
+    top: 0,
   },
 });
