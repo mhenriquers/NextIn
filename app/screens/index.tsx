@@ -6,6 +6,8 @@ import {
   ImageBackground,
   TextInput,
   Image,
+  TouchableOpacity,
+  Pressable,
 } from "react-native";
 
 // estrutura do app
@@ -13,10 +15,10 @@ import {
 export default function App() {
   return (
     <ImageBackground
-      source={require("../assets/images/fundoGradiente.jpg")}
+      source={require("../assets/images/fundoGradiente.png")}
       resizeMode="cover"
       style={styles.fundo}
-      blurRadius={15}
+      blurRadius={20}
     >
       <View style={styles.container}>
         <Image
@@ -35,17 +37,57 @@ export default function App() {
           <Text style={styles.login}>Login</Text>
           <View style={styles.containerInput}>
             <Text style={styles.labelName}>Usuário</Text>
-            <TextInput style={styles.input}></TextInput>
+
+            <View style={styles.container2}>
+              <Image
+                source={require("../assets/images/iconPerson.png")}
+                style={styles.iconInput}
+              />
+
+              <TextInput
+                style={styles.input}
+                placeholder="Exemplo@gmail.com"
+                placeholderTextColor={"#999"}
+              ></TextInput>
+            </View>
           </View>
           <View style={styles.containerInput}>
             <Text style={styles.labelName}>Senha</Text>
-            <TextInput style={styles.input}></TextInput>
+            <View style={styles.container2}>
+              <Image
+                source={require("../assets/images/iconLock.png")}
+                style={styles.iconInput}
+              />
+              <Image source={require("../assets/images/eyeNotSee.png")} 
+              style={styles.iconEye}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="sua senha"
+                placeholderTextColor={"#999"}
+              ></TextInput>
+            </View>
           </View>
           <View style={styles.containerCheck}>
             <View style={styles.quadrado}></View>
             <Text style={styles.labelCheck}> lembrar-me </Text>
+            <Text style={styles.labelCheck}> Esqueci minha senha </Text>
           </View>
           {/*</ImageBackground>*/}
+
+
+          <View style={styles.containerBotao} >
+          <Pressable
+          style={({pressed}) =>[
+            styles.botao,
+            {backgroundColor: pressed ? "#2846a0" : "#3e6eff" }
+          ]}
+          >        
+          <Text style={styles.botaoText}> Entrar </Text>  
+          </Pressable>
+          </View>
+
+
         </View>
       </View>
     </ImageBackground>
@@ -53,6 +95,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     alignItems: "center",
@@ -79,12 +122,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 35,
     marginBottom: 10,
+    paddingLeft: 30,
   },
 
   box: {
     borderRadius: 10,
     width: "80%",
-    height: "40%",
+    height: "50%",
     alignItems: "center",
     backgroundColor: "#000",
   },
@@ -112,7 +156,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginTop: 90,
+    marginTop: 50,
     marginBottom: 50,
     width: 300,
     height: 100,
@@ -131,14 +175,14 @@ const styles = StyleSheet.create({
   },
 
   containerInput: {
-    width: "60%",
+    width: "70%",
     alignItems: "center",
   },
 
   containerCheck: {
     position: "absolute",
-    left: 68,
-    bottom: 30,
+    left: 50,
+    bottom: 100,
     flexDirection: "row",
   },
 
@@ -152,6 +196,52 @@ const styles = StyleSheet.create({
   },
 
   labelCheck: {
+    color: "#fff",
+    marginRight: 24,
+  },
+
+  iconInput: {
+    height: 14,
+    width: 14,
+    position: "absolute",
+    zIndex: 10,
+    top: 10,
+    left: 10,
+  },
+
+  container2: {
+    width: "100%",
+  },
+
+  iconEye: {
+    height: 20,
+    width: 20,
+    position: "absolute",
+    zIndex: 10,
+    top: 8,
+    right: 10,
+  },
+
+  containerBotao: {
+    marginTop: 50,    
+  },
+
+  botao:{
+      borderWidth: 1,
+    borderColor: "#FFF",
+    borderRadius: 25,
+    width: 240,
+    height: 50,
+    backgroundColor: "#3e6eff",
+    alignItems: "center",
+    justifyContent: "center",
+    
+  },
+
+  botaoText:{
+    fontWeight:'bold',
     color: "#FFF",
+    fontSize: 24,
+
   },
 });
