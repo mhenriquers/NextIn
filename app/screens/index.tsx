@@ -12,10 +12,8 @@ import {
 
 // estrutura do app
 
-
 export default function App() {
-  
-const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   return (
     <ImageBackground
@@ -63,14 +61,14 @@ const [mostrarSenha, setMostrarSenha] = useState(false);
                 style={styles.iconInput}
               />
               <TouchableOpacity
-               style={styles.containerEye}
-               onPress={() => setMostrarSenha(!mostrarSenha)}
-               >
+                style={styles.containerEye}
+                onPress={() => setMostrarSenha(!mostrarSenha)}
+              >
                 <Image
                   source={
                     mostrarSenha
-                    ? require("../assets/images/eyeSee.png")
-                    : require("../assets/images/eyeNotSee.png") 
+                      ? require("../assets/images/eyeSee.png")
+                      : require("../assets/images/eyeNotSee.png")
                   }
                   style={styles.iconEye}
                 />
