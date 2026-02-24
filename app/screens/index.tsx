@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,11 @@ import {
 
 // estrutura do app
 
+
 export default function App() {
+  
+const [mostrarSenha, setMostrarSenha] = useState(false);
+
   return (
     <ImageBackground
       source={require("../assets/images/fundoGradiente.png")}
@@ -58,10 +62,21 @@ export default function App() {
                 source={require("../assets/images/iconLock.png")}
                 style={styles.iconInput}
               />
-              <Image source={require("../assets/images/eyeNotSee.png")} 
-              style={styles.iconEye}
-              />
+              <TouchableOpacity
+               style={styles.containerEye}
+               onPress={() => setMostrarSenha(!mostrarSenha)}
+               >
+                <Image
+                  source={
+                    mostrarSenha
+                    ? require("../assets/images/eyeSee.png")
+                    : require("../assets/images/eyeNotSee.png") 
+                  }
+                  style={styles.iconEye}
+                />
+              </TouchableOpacity>
               <TextInput
+                secureTextEntry={!mostrarSenha}
                 style={styles.input}
                 placeholder="sua senha"
                 placeholderTextColor={"#999"}
@@ -75,19 +90,16 @@ export default function App() {
           </View>
           {/*</ImageBackground>*/}
 
-
-          <View style={styles.containerBotao} >
-          <Pressable
-          style={({pressed}) =>[
-            styles.botao,
-            {backgroundColor: pressed ? "#2846a0" : "#3e6eff" }
-          ]}
-          >        
-          <Text style={styles.botaoText}> Entrar </Text>  
-          </Pressable>
+          <View style={styles.containerBotao}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.botao,
+                { backgroundColor: pressed ? "#2846a0" : "#3e6eff" },
+              ]}
+            >
+              <Text style={styles.botaoText}> Entrar </Text>
+            </Pressable>
           </View>
-
-
         </View>
       </View>
     </ImageBackground>
@@ -95,7 +107,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     alignItems: "center",
@@ -123,6 +134,7 @@ const styles = StyleSheet.create({
     height: 35,
     marginBottom: 10,
     paddingLeft: 30,
+    color: "#FFF",
   },
 
   box: {
@@ -213,7 +225,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 
-  iconEye: {
+  containerEye: {
     height: 20,
     width: 20,
     position: "absolute",
@@ -222,12 +234,17 @@ const styles = StyleSheet.create({
     right: 10,
   },
 
-  containerBotao: {
-    marginTop: 50,    
+  iconEye: {
+    height: 20,
+    width: 20,
   },
 
-  botao:{
-      borderWidth: 1,
+  containerBotao: {
+    marginTop: 50,
+  },
+
+  botao: {
+    borderWidth: 1,
     borderColor: "#FFF",
     borderRadius: 25,
     width: 240,
@@ -235,13 +252,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#3e6eff",
     alignItems: "center",
     justifyContent: "center",
-    
   },
 
-  botaoText:{
-    fontWeight:'bold',
+  botaoText: {
+    fontWeight: "bold",
     color: "#FFF",
     fontSize: 24,
-
   },
 });
