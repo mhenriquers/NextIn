@@ -17,7 +17,8 @@ import {
 
 export default function App() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [lembrar, setLembrar] = useState(false);
+  const [colocarV, setColocarV] = useState(false);
+  const [lembrarEmail, setLembrarEmail] = useState('');
 
   return (
     <View style={{flex: 1}}>
@@ -91,9 +92,9 @@ export default function App() {
               </View>
             </View>
             <View style={styles.containerCheck}>
-              <TouchableOpacity onPress={() => setLembrar(!lembrar)}>
+              <TouchableOpacity onPress={() => setColocarV(!colocarV)}>
                 <View style={styles.quadrado}>
-                 {lembrar &&
+                 {colocarV &&
                  <Image source={require("../assets/images/V.png") } style={styles.verificado} />}
                 </View>
               </TouchableOpacity>
