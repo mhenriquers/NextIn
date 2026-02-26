@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -11,24 +11,48 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-  import { Video, ResizeMode, } from 'expo-av';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Video, ResizeMode } from "expo-av";
 
 // estrutura do app
 
 export default function App() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [colocarV, setColocarV] = useState(false);
-  const [lembrarEmail, setLembrarEmail] = useState('');
+  const [lembrarEmail, setLembrarEmail] = useState("");
+
+  async function handleLogin() {
+    if (colocarV) {
+      await AsyncStorage.setItem("email", lembrarEmail);
+      await AsyncStorage.setItem("lembrar", "true");
+    } else {
+      await AsyncStorage.removeItem("email");
+      await AsyncStorage.removeItem("lembrar");
+    }
+  }
+
+  useEffect(() => {
+    async function carregarDados(){
+      const emailSalvo = await AsyncStorage.getItem('email');
+      const lembrarSalvo = await AsyncStorage.getItem('lembrar');
+
+      if(lembrarSalvo=== "true"){
+        setLembrarEmail(emailSalvo||"");
+        setColocarV(true);
+      }
+    }
+    carregarDados();
+  },[]);
 
   return (
-    <View style={{flex: 1}}>
-    <Video
-      source={require("../assets/videos/videoFundo1.mp4")}
-      style={styles.fundo}
-      resizeMode={ResizeMode.COVER}
-      shouldPlay
-      isLooping
-      isMuted
+    <View style={{ flex: 1 }}>
+      <Video
+        source={require("../assets/videos/videoFundo1.mp4")}
+        style={styles.fundo}
+        resizeMode={ResizeMode.COVER}
+        shouldPlay
+        isLooping
+        isMuted
       />
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -60,6 +84,8 @@ export default function App() {
                   style={styles.input}
                   placeholder="Exemplo@gmail.com"
                   placeholderTextColor={"#999"}
+                  value={lembrarEmail}
+                  onChangeText={setLembrarEmail}
                 ></TextInput>
               </View>
             </View>
@@ -94,8 +120,12 @@ export default function App() {
             <View style={styles.containerCheck}>
               <TouchableOpacity onPress={() => setColocarV(!colocarV)}>
                 <View style={styles.quadrado}>
-                 {colocarV &&
-                 <Image source={require("../assets/images/V.png") } style={styles.verificado} />}
+                  {colocarV && (
+                    <Image
+                      source={require("../assets/images/V.png")}
+                      style={styles.verificado}
+                    />
+                  )}
                 </View>
               </TouchableOpacity>
               <Text style={styles.labelCheck}> lembrar-me </Text>
@@ -105,6 +135,7 @@ export default function App() {
 
             <View style={styles.containerBotao}>
               <Pressable
+              onPress={handleLogin}
                 style={({ pressed }) => [
                   styles.botao,
                   { backgroundColor: pressed ? "#2846a0" : "#3e6eff" },
@@ -116,8 +147,7 @@ export default function App() {
           </View>
         </View>
       </TouchableWithoutFeedback>
-      </View>
-
+    </View>
   );
 }
 
@@ -136,12 +166,12 @@ const styles = StyleSheet.create({
   },
 
   fundo: {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  zIndex: -1,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
   },
 
   input: {
@@ -216,7 +246,7 @@ const styles = StyleSheet.create({
     left: 50,
     bottom: 100,
     flexDirection: "row",
-    alignContent: 'center',
+    alignContent: "center",
     width: "70%",
   },
 
@@ -232,7 +262,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
 
-  verificado:{
+  verificado: {
     height: 15,
     width: 15,
     zIndex: 5,
@@ -241,8 +271,7 @@ const styles = StyleSheet.create({
   labelCheck: {
     color: "#fff",
     marginRight: 24,
-    alignSelf: 'center',
-
+    alignSelf: "center",
   },
 
   iconInput: {
