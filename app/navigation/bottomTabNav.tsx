@@ -1,30 +1,39 @@
 import React from "react";
-import {View, Text, StyleSheet} from 'react-native'; 
+import { View, Text, StyleSheet, Image, } from "react-native";
 
+export default function Home() {
+  return (
+    <View style={styles.container}>
+      <Text>Olá Bottom Tab</Text>
+      <View style={{ flex: 1 }}></View>
 
-
-export default function Home (){
-    return(
-    <View style={styles.container} >
-        <Text>
-            Olá Bottom Tab 
-        </Text>
-        <View style={styles.containerNav}></View>
+      <View style={styles.containerNav}>
+        <Image source={require('../assets/icons/home.png')} style={styles.iconBar}/>
+         <Image source={require('../assets/icons/time.png')} style={styles.iconBar}/>
+          <Image source={require('../assets/icons/cog.png')} style={styles.iconBar}/>
+      </View>
     </View>
-)};
+  );
+}
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        backgroundColor:'#FFF',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#FFF",
+  },
 
-    containerNav:{
-        width: 50,
-        height: 50,
-        borderWidth: 2,
-        borderColor: "#000",
-    },
+  containerNav: {
+    width: "102%",
+    height: 70,
+    borderWidth: 2,
+    borderColor: "#000",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: "space-around",
+  },
+
+  iconBar: {
+    width: 50,
+    height: 50,
+  },
 });
