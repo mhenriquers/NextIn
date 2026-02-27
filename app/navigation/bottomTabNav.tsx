@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 export default function Home() {
   return (
@@ -8,9 +8,36 @@ export default function Home() {
       <View style={{ flex: 1 }}></View>
 
       <View style={styles.containerNav}>
-        <Image source={require('../assets/icons/home.png')} style={styles.iconBar}/>
-         <Image source={require('../assets/icons/time.png')} style={styles.iconBar}/>
-          <Image source={require('../assets/icons/cog.png')} style={styles.iconBar}/>
+
+        <TouchableOpacity>
+        <View style={styles.containerIcon}>
+          <Image
+            source={require("../assets/icons/home.png")}
+            style={styles.iconBar}
+          />
+          <Text style={styles.textIcon}>Home</Text>
+        </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+        <View style={styles.containerIcon}>
+          <Image
+            source={require("../assets/icons/clock.png")}
+            style={styles.iconBar}
+          />
+          <Text style={styles.textIcon}>Filas</Text>
+        </View>
+        </TouchableOpacity>
+        
+        <TouchableOpacity>
+        <View style={styles.containerIcon}>
+          <Image
+            source={require("../assets/icons/engrenagem.png")}
+            style={styles.iconBar}
+          />
+          <Text style={styles.textIcon}>Configurações</Text>
+        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -24,16 +51,29 @@ const styles = StyleSheet.create({
 
   containerNav: {
     width: "102%",
-    height: 70,
-    borderWidth: 2,
+    height: 63,
+    borderWidth: 1,
     borderColor: "#000",
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-around",
+    borderRadius: 0,
+    backgroundColor: '#0d0d0d',
+  },
+
+  containerIcon: {
+    alignItems: "center",
+    
   },
 
   iconBar: {
     width: 50,
     height: 50,
+    padding: 0,
+    paddingTop: 5,
+  },
+
+  textIcon:{
+    color: "#FFF",
   },
 });
