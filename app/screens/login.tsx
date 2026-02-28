@@ -16,7 +16,7 @@ import { Video, ResizeMode } from "expo-av";
 
 // estrutura do app
 
-export default function App() {
+export default function Login() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [colocarV, setColocarV] = useState(false);
   const [lembrarEmail, setLembrarEmail] = useState("");
