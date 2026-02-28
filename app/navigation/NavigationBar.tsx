@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-export default function bottomTabNav() {
+export default function NavigationBar() {
   return (
     <View style={styles.container}>
       <Text>Olá Bottom Tab</Text>
