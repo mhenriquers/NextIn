@@ -46,14 +46,14 @@ export default function Login() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Video
+      {/*<Video
         source={require("../assets/videos/videoFundo1.mp4")}
         style={styles.fundo}
         resizeMode={ResizeMode.COVER}
         shouldPlay
         isLooping
         isMuted
-      />
+      />*/}
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -119,16 +119,18 @@ export default function Login() {
             </View>
             <View style={styles.containerCheck}>
               <TouchableOpacity onPress={() => setColocarV(!colocarV)}>
-                <View style={styles.quadrado}>
+                
+                {/*<View style={styles.quadrado}>
                   {colocarV && (
                     <Image
                       source={require("../assets/images/V.png")}
                       style={styles.verificado}
                     />
                   )}
-                </View>
+                </View>*/}
+                
               </TouchableOpacity>
-              <Text style={styles.labelCheck}> lembrar-me </Text>
+              {/*<Text style={styles.labelCheck}> lembrar-me </Text>*/}
               <Text style={styles.labelCheck}> Problemas com login?</Text>
             </View>
             {/*</ImageBackground>*/}
@@ -141,7 +143,7 @@ export default function Login() {
                   { backgroundColor: pressed ? "#2846a0" : "#3e6eff" },
                 ]}
               >
-                <Text style={styles.botaoText}> Entrar </Text>
+                <Text style={styles.botaoText}> Login </Text>
               </Pressable>
             </View>
           </View>
@@ -155,6 +157,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    backgroundColor: '#444',
   },
 
   texto: {
@@ -175,11 +178,11 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "#000",
+    backgroundColor: "#0000",
     padding: 5,
     borderRadius: 5,
     borderWidth: 0.5,
-    borderColor: "#FFF",
+    borderColor: "#000",
     width: "100%",
     height: 35,
     marginBottom: 10,
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "50%",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.55)",
+    backgroundColor: "rgba(0,0,0)",
   },
 
   fundoBox: {
@@ -207,7 +210,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginBottom: 10,
     fontWeight: "bold",
-    color: "#FFF",
+    color: "#fff",
   },
 
   imgPerfil: {
@@ -244,7 +247,7 @@ const styles = StyleSheet.create({
   containerCheck: {
     position: "absolute",
     left: 50,
-    bottom: 100,
+    bottom: 105,
     flexDirection: "row",
     alignContent: "center",
     width: "70%",
@@ -269,9 +272,10 @@ const styles = StyleSheet.create({
   },
 
   labelCheck: {
-    color: "#fff",
+    color: "#FFF",
     marginRight: 24,
     alignSelf: "center",
+    fontSize: 18,
   },
 
   iconInput: {
@@ -302,15 +306,15 @@ const styles = StyleSheet.create({
   },
 
   containerBotao: {
-    marginTop: 50,
+    marginTop: 35,
   },
 
   botao: {
     borderWidth: 1,
     borderColor: "#FFF",
-    borderRadius: 25,
+    borderRadius: 10,
     width: 240,
-    height: 50,
+    height: 45,
     backgroundColor: "#3e6eff",
     alignItems: "center",
     justifyContent: "center",
