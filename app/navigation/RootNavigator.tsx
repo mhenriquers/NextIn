@@ -8,5 +8,5 @@ export default function RootNavigator() {
   function swap() {
     return Isloggedin ? <AuthNavigator /> : <TabNavigator />;
   }
-  return <NavigationContainer>{swap()}</NavigationContainer>;
+  return swap();
 }
