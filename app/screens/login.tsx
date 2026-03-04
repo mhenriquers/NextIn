@@ -32,17 +32,17 @@ export default function Login() {
   }
 
   useEffect(() => {
-    async function carregarDados(){
-      const emailSalvo = await AsyncStorage.getItem('email');
-      const lembrarSalvo = await AsyncStorage.getItem('lembrar');
+    async function carregarDados() {
+      const emailSalvo = await AsyncStorage.getItem("email");
+      const lembrarSalvo = await AsyncStorage.getItem("lembrar");
 
-      if(lembrarSalvo=== "true"){
-        setLembrarEmail(emailSalvo||"");
+      if (lembrarSalvo === "true") {
+        setLembrarEmail(emailSalvo || "");
         setColocarV(true);
       }
     }
     carregarDados();
-  },[]);
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -62,10 +62,6 @@ export default function Login() {
             style={styles.logo}
           />
           <View style={styles.box}>
-            {/*<ImageBackground
-            source={require("../assets/images/login-bg.jpg")}
-            style={styles.fundoBox}
-          >*/}
             <Image
               source={require("../assets/images/perfil.png")}
               style={styles.imgPerfil}
@@ -118,29 +114,15 @@ export default function Login() {
               </View>
             </View>
             <View style={styles.containerCheck}>
-              <TouchableOpacity onPress={() => setColocarV(!colocarV)}>
-                
-                {/*<View style={styles.quadrado}>
-                  {colocarV && (
-                    <Image
-                      source={require("../assets/images/V.png")}
-                      style={styles.verificado}
-                    />
-                  )}
-                </View>*/}
-                
-              </TouchableOpacity>
-
-              {/*<Text style={styles.labelCheck}> lembrar-me </Text>*/}
               <TouchableOpacity>
-              <Text style={styles.labelCheck}> Problemas com login?</Text>
+                <Text style={styles.labelCheck}> Problemas com login?</Text>
               </TouchableOpacity>
             </View>
             {/*</ImageBackground>*/}
 
             <View style={styles.containerBotao}>
               <Pressable
-              onPress={handleLogin}
+                onPress={handleLogin}
                 style={({ pressed }) => [
                   styles.botao,
                   { backgroundColor: pressed ? "#2846a0" : "#3e6eff" },
@@ -160,7 +142,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: '#444',
+    backgroundColor: "#444",
   },
 
   texto: {
@@ -185,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     borderWidth: 0.5,
-    borderColor: "#000",
+    borderColor: "#FFF",
     width: "100%",
     height: 35,
     marginBottom: 10,
@@ -243,14 +225,13 @@ const styles = StyleSheet.create({
   },
 
   containerInput: {
+    
     width: "70%",
     alignItems: "center",
   },
 
   containerCheck: {
-    position: "absolute",
-    left: 50,
-    bottom: 105,
+    top: 5,
     flexDirection: "row",
     alignContent: "center",
     width: "70%",

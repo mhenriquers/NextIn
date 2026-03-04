@@ -8,7 +8,7 @@ const stack = createNativeStackNavigator();
 
 export default function AppNavigator(){
     return(
-        <stack.Navigator>
+        <stack.Navigator screenOptions={{headerShown: false}} >
             <stack.Screen name='login' component={Login}/>
             <stack.Screen name='logproblem' component={Logproblem}/>
 
