@@ -130,8 +130,11 @@ export default function Login() {
                 </View>*/}
                 
               </TouchableOpacity>
+
               {/*<Text style={styles.labelCheck}> lembrar-me </Text>*/}
+              <TouchableOpacity>
               <Text style={styles.labelCheck}> Problemas com login?</Text>
+              </TouchableOpacity>
             </View>
             {/*</ImageBackground>*/}
 
