@@ -1,14 +1,14 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import RootNavigator from "./RootNavigator";
 
 
-import  Navigation  from "./AuthNavigator";
 
 
 export default function AppRoutes() {
     return(
         <NavigationContainer>
-            <Navigation/>
+            <RootNavigator/>
         </NavigationContainer>
     );
 

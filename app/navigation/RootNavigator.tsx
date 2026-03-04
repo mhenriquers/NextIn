@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import React, { useState } from "react";
 import Logproblem from "../logproblem";
 import Login from "../screens/login";
-import AppNavigator from "./AppNavigator";
+import AppNavigator from "./TabNavigator";
 import AuthNavigator from "./AuthNavigator";
 
 
