@@ -1,15 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 
-export default function NavigationBar() {
+export default function NavigationBar({state, descriptors, navigation}: BottomTabBarProps) {
   return (
-    <View style={styles.container}>
-      <Text>Olá Bottom Tab</Text>
-      <View style={{ flex: 1 }}></View>
+
 
       <View style={styles.containerNav}>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => navigation.navigate('home')}
+        
+        >
         <View style={styles.containerIcon}>
           <Image
             source={require("../assets/icons/home.png")}
@@ -19,7 +21,9 @@ export default function NavigationBar() {
         </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => navigation.navigate('fila')}
+        >
         <View style={styles.containerIcon}>
           <Image
             source={require("../assets/icons/clock.png")}
@@ -29,7 +33,9 @@ export default function NavigationBar() {
         </View>
         </TouchableOpacity>
         
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => navigation.navigate('configuracoes')}
+        >
         <View style={styles.containerIcon}>
           <Image
             source={require("../assets/icons/engrenagem.png")}
@@ -39,19 +45,16 @@ export default function NavigationBar() {
         </View>
         </TouchableOpacity>
       </View>
-    </View>
+
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-  },
+
 
   containerNav: {
-    width: "102%",
-    height: 63,
+    width: "100%",
+    height: 70,
     borderWidth: 1,
     borderColor: "#000",
     flexDirection: "row",
