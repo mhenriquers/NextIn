@@ -4,10 +4,9 @@
     "slug": "virtualstack",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./app/assets/images/logoNext.png",
     "scheme": "virtualstack",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -18,7 +17,6 @@
         "backgroundImage": "./app/assets/images/login-bg.jpg",
         "monochromeImage": "./app/assets/images/logoNext.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
