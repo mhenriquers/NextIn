@@ -16,6 +16,7 @@ export default function Navigation(){
       <Tab.Screen name='home' component={Home}/>
       <Tab.Screen name='configuracoes' component={Configuracoes}/>
       <Tab.Screen name='fila' component={Fila}/>
+      
     </Tab.Navigator>
   );
 }

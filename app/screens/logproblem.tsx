@@ -14,7 +14,7 @@ import {
 
 // estrutura do app
 
-export default function Login() {
+export default function Logproblem() {
 
   return (
     <View style={{ flex: 1 }}>
