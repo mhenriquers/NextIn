@@ -22,7 +22,7 @@ export default function Logproblem() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Image
-            source={require("../assets/images/logoNext.png")}
+            source={require("./assets/images/logoNext.png")}
             style={styles.logo}
           />
           <View style={styles.box}>

@@ -1,12 +1,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //telas
-import  Configuracoes  from '../screens/configuracoes';
-import  Fila  from '../screens/fila';
-import  Home  from '../screens/home';
+import  Configuracoes  from '../configuracoes';
+import  Fila  from '../fila';
+import  Home  from '../home';
 import NavigationBar from "./NavigationBar";
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
+const Stack = createBottomTabNavigator();
+
 
 export default function Navigation(){
   return(
