@@ -1,9 +1,5 @@
-import RootNavigator from "./navigation/RootNavigator";
-import { NavigationContainer } from "@react-navigation/native";
+import AppRoutes from "./navigation/AppRoutes";
 
-
-export default function Index(){
-    return(
-        <RootNavigator/>
-    );
+export default function Index() {
+  return <AppRoutes />;
 }
