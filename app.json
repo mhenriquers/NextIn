@@ -4,7 +4,7 @@
     "slug": "virtualstack",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/images/logoNext.png",
+    "icon": "./src/assets/images/logoNext.png",
     "scheme": "virtualstack",
     "userInterfaceStyle": "automatic",
     "ios": {
@@ -13,22 +13,21 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./app/assets/images/logoNext.png",
-        "backgroundImage": "./app/assets/images/login-bg.jpg",
-        "monochromeImage": "./app/assets/images/logoNext.png"
+        "foregroundImage": "./src/assets/images/logoNext.png",
+        "backgroundImage": "./src/assets/images/login-bg.jpg",
+        "monochromeImage": "./src/assets/images/logoNext.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
-      "favicon": "./app/assets/images/logoNext.png"
+      "favicon": "./src/assets/images/logoNext.png"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./app/assets/images/logoNext.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
