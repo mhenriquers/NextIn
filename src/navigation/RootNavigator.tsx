@@ -6,7 +6,7 @@ import AuthNavigator from "./AuthNavigator";
 export default function RootNavigator() {
   const [Isloggedin, setIsLoggedin] = useState(false);
   function swap() {
-    return Isloggedin ? <AuthNavigator /> : <TabNavigator />;
+    return Isloggedin ? <TabNavigator /> :  <AuthNavigator /> ;
   }
   return swap();
 }
