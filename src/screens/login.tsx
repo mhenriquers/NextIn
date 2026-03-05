@@ -15,30 +15,26 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // estrutura do app
 
-
-export default function Login() {
-  
-  const [mostrarSenha, setMostrarSenha] = useState(false);;
+export default function Login({navigation}:{navigation : any}) {
+  const [mostrarSenha, setMostrarSenha] = useState(false);
   const [lembrarEmail, setLembrarEmail] = useState("");
 
   async function handleLogin() {
-      await AsyncStorage.setItem("email", lembrarEmail); //salva o email
-      await AsyncStorage.setItem("lembrar", "true"); // salva que o programa deve lembrar do email quando iniciar
-    }
+    await AsyncStorage.setItem("email", lembrarEmail); //salva o email
+    await AsyncStorage.setItem("lembrar", "true"); // salva que o programa deve lembrar do email quando iniciar
+  }
 
   useEffect(() => {
     async function carregarDados() {
       const emailSalvo = await AsyncStorage.getItem("email");
       const lembrarSalvo = await AsyncStorage.getItem("lembrar");
       setLembrarEmail(emailSalvo || "");
-      
     }
     carregarDados();
   }, []);
 
   return (
     <View style={{ flex: 1 }}>
-
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Image
@@ -64,7 +60,6 @@ export default function Login() {
                   style={styles.input}
                   placeholder="Exemplo@gmail.com"
                   placeholderTextColor={"#999"}
-
                 ></TextInput>
               </View>
             </View>
@@ -98,7 +93,13 @@ export default function Login() {
             </View>
             <View style={styles.containerCheck}>
               <TouchableOpacity>
-                <Text style={styles.labelCheck}> Problemas com login?</Text>
+                <Text
+                  onPress={() => navigation.navigate("Logproblem")}
+                  style={styles.labelCheck}
+                >
+                  {" "}
+                  Problemas com login?
+                </Text>
               </TouchableOpacity>
             </View>
 
