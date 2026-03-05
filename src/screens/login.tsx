@@ -18,43 +18,26 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
   
-  const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [colocarV, setColocarV] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);;
   const [lembrarEmail, setLembrarEmail] = useState("");
 
   async function handleLogin() {
-    if (colocarV) {
-      await AsyncStorage.setItem("email", lembrarEmail);
-      await AsyncStorage.setItem("lembrar", "true");
-    } else {
-      await AsyncStorage.removeItem("email");
-      await AsyncStorage.removeItem("lembrar");
+      await AsyncStorage.setItem("email", lembrarEmail); //salva o email
+      await AsyncStorage.setItem("lembrar", "true"); // salva que o programa deve lembrar do email quando iniciar
     }
-  }
 
   useEffect(() => {
     async function carregarDados() {
       const emailSalvo = await AsyncStorage.getItem("email");
       const lembrarSalvo = await AsyncStorage.getItem("lembrar");
-
-      if (lembrarSalvo === "true") {
-        setLembrarEmail(emailSalvo || "");
-        setColocarV(true);
-      }
+      setLembrarEmail(emailSalvo || "");
+      
     }
     carregarDados();
   }, []);
 
   return (
     <View style={{ flex: 1 }}>
-      {/*<Video
-        source={require("../assets/videos/videoFundo1.mp4")}
-        style={styles.fundo}
-        resizeMode={ResizeMode.COVER}
-        shouldPlay
-        isLooping
-        isMuted
-      />*/}
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -81,8 +64,7 @@ export default function Login() {
                   style={styles.input}
                   placeholder="Exemplo@gmail.com"
                   placeholderTextColor={"#999"}
-                  value={lembrarEmail}
-                  onChangeText={setLembrarEmail}
+
                 ></TextInput>
               </View>
             </View>
@@ -119,7 +101,6 @@ export default function Login() {
                 <Text style={styles.labelCheck}> Problemas com login?</Text>
               </TouchableOpacity>
             </View>
-            {/*</ImageBackground>*/}
 
             <View style={styles.containerBotao}>
               <Pressable
@@ -143,7 +124,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#444",
+    backgroundColor: "#FFFDD0",
   },
 
   texto: {
