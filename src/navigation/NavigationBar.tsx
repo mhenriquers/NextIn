@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function NavigationBar({state, descriptors, navigation}: BottomTabBarProps) {
   return (
 
-
-      <View style={styles.containerNav}>
+      
+      <SafeAreaView style={styles.containerNav}>
 
         <TouchableOpacity
         onPress={() => navigation.navigate('home')}
@@ -44,7 +45,7 @@ export default function NavigationBar({state, descriptors, navigation}: BottomTa
           <Text style={styles.textIcon}>Configurações</Text>
         </View>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
 
   );
 }
