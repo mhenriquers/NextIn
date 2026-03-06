@@ -15,13 +15,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 // estrutura do app
 
-function logar(email : any, senha : any, navigation : any ){
-  if(email === 'teste@gmail.com' && senha === '123')
-    navigation.navigate('home')   
+function logar(email: any, senha: any, navigation: any) {
+  if (email === "teste@gmail.com" && senha === "123")
+    navigation.navigate("home");
 }
-export default function Login({navigation}:{navigation : any}) {
+export default function Login({ navigation }: { navigation: any }) {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [lembrarEmail, setLembrarEmail] = useState("");
+  const [senha, setSenha] = useState('');
 
   async function handleLogin() {
     await AsyncStorage.setItem("email", lembrarEmail); //salva o email
@@ -64,6 +65,8 @@ export default function Login({navigation}:{navigation : any}) {
                   style={styles.input}
                   placeholder="Exemplo@gmail.com"
                   placeholderTextColor={"#999"}
+                  value={lembrarEmail}
+                  onChangeText={setLembrarEmail}
                 ></TextInput>
               </View>
             </View>
@@ -92,6 +95,8 @@ export default function Login({navigation}:{navigation : any}) {
                   style={styles.input}
                   placeholder="sua senha"
                   placeholderTextColor={"#999"}
+                  value={senha}
+                  onChangeText={setSenha}
                 ></TextInput>
               </View>
             </View>
@@ -109,7 +114,11 @@ export default function Login({navigation}:{navigation : any}) {
 
             <View style={styles.containerBotao}>
               <Pressable
-                onPress={handleLogin}
+                onPress={() => {
+                  handleLogin();
+                  logar(lembrarEmail, senha, navigation );
+                  ;
+                }}
                 style={({ pressed }) => [
                   styles.botao,
                   { backgroundColor: pressed ? "#2846a0" : "#3e6eff" },
