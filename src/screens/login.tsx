@@ -12,9 +12,13 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 // estrutura do app
 
+function logar(email : any, senha : any, navigation : any ){
+  if(email === 'teste@gmail.com' && senha === '123')
+    navigation.navigate('home')   
+}
 export default function Login({navigation}:{navigation : any}) {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [lembrarEmail, setLembrarEmail] = useState("");
@@ -94,7 +98,7 @@ export default function Login({navigation}:{navigation : any}) {
             <View style={styles.containerCheck}>
               <TouchableOpacity>
                 <Text
-                  onPress={() => navigation.navigate("Logproblem")}
+                  onPress={() => navigation.navigate("logproblem")}
                   style={styles.labelCheck}
                 >
                   {" "}
