@@ -1,1 +1,0 @@
-context/ → estado global (ex: fila)
