@@ -13,11 +13,14 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useAuth } from "../context/AuthContext";
+
 // estrutura do app
 
+const { login } = useAuth()
 function logar(email: any, senha: any, navigation: any) {
   if (email === "teste@gmail.com" && senha === "123")
-    navigation.navigate("home");
+    login()
 }
 export default function Login({ navigation }: { navigation: any }) {
   const [mostrarSenha, setMostrarSenha] = useState(false);

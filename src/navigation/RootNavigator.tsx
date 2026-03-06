@@ -1,12 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useState } from "react";
+import React from "react";
 import TabNavigator from "./TabNavigator";
 import AuthNavigator from "./AuthNavigator";
+import { useAuth } from "../context/AuthContext";
 
 export default function RootNavigator() {
-  const [Isloggedin, setIsLoggedin] = useState(false);
-  function swap() {
-    return Isloggedin ? <TabNavigator /> :  <AuthNavigator /> ;
-  }
-  return swap();
+  const { isLoggedIn } = useAuth();
+  return isLoggedIn ? <TabNavigator /> : <AuthNavigator />;
 }
