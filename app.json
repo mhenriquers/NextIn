@@ -4,7 +4,7 @@
     "slug": "nextin",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/logoNext.png",
+    "icon": "./src/assets/images/log.png",
     "scheme": "virtualstack",
     "userInterfaceStyle": "automatic",
     "ios": {
@@ -13,9 +13,9 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./src/assets/images/logoNext.png",
-        "backgroundImage": "./src/assets/images/login-bg.jpg",
-        "monochromeImage": "./src/assets/images/logoNext.png"
+        "foregroundImage": "./src/assets/images/log.png",
+        "backgroundImage": "./src/assets/images/log.png",
+        "monochromeImage": "./src/assets/images/log.png"
       },
       "predictiveBackGestureEnabled": false
     },
@@ -27,7 +27,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./app/assets/images/logoNext.png",
+          "image": "./app/assets/images/log.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
