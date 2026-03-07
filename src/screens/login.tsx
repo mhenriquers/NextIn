@@ -17,8 +17,9 @@ import { useAuth } from "../context/AuthContext";
 
 // estrutura do app
 
-const { login } = useAuth()
+
 function logar(email: any, senha: any, navigation: any) {
+  const { login } = useAuth()
   if (email === "teste@gmail.com" && senha === "123")
     login()
 }
