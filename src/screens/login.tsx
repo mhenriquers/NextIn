@@ -20,7 +20,7 @@ import { useAuth } from "../context/AuthContext";
 
 function logar(email: any, senha: any, navigation: any) {
   const { login } = useAuth()
-  if (email === "teste@gmail.com" && senha === "123")
+  if (email === "teste@gmail.com" && senha === "teste123")
     login()
 }
 export default function Login({ navigation }: { navigation: any }) {
