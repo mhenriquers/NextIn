@@ -47,12 +47,12 @@ export default function Login({ navigation }: { navigation: any }) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Image
-            source={require("../assets/images/logoNext.png")}
+            source={require("../../assets/images/logoNext.png")}
             style={styles.logo}
           />
           <View style={styles.box}>
             <Image
-              source={require("../assets/images/perfil.png")}
+              source={require("../../assets/images/perfil.png")}
               style={styles.imgPerfil}
             />
             <Text style={styles.login}>Login</Text>
@@ -61,7 +61,7 @@ export default function Login({ navigation }: { navigation: any }) {
 
               <View style={styles.container2}>
                 <Image
-                  source={require("../assets/images/iconPerson.png")}
+                  source={require("../../assets/images/iconPerson.png")}
                   style={styles.iconInput}
                 />
 
@@ -78,7 +78,7 @@ export default function Login({ navigation }: { navigation: any }) {
               <Text style={styles.labelName}>Senha</Text>
               <View style={styles.container2}>
                 <Image
-                  source={require("../assets/images/iconLock.png")}
+                  source={require("../../assets/images/iconLock.png")}
                   style={styles.iconInput}
                 />
                 <TouchableOpacity
@@ -88,8 +88,8 @@ export default function Login({ navigation }: { navigation: any }) {
                   <Image
                     source={
                       mostrarSenha
-                        ? require("../assets/images/eyeSee.png")
-                        : require("../assets/images/eyeNotSee.png")
+                        ? require("../../assets/images/eyeSee.png")
+                        : require("../../assets/images/eyeNotSee.png")
                     }
                     style={styles.iconEye}
                   />

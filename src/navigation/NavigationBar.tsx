@@ -15,7 +15,7 @@ export default function NavigationBar({state, descriptors, navigation}: BottomTa
         >
         <View style={styles.containerIcon}>
           <Image
-            source={require("../assets/icons/home.png")}
+            source={require("../../assets/icons/home.png")}
             style={styles.iconBar}
           />
           <Text style={styles.textIcon}>Home</Text>
@@ -27,7 +27,7 @@ export default function NavigationBar({state, descriptors, navigation}: BottomTa
         >
         <View style={styles.containerIcon}>
           <Image
-            source={require("../assets/icons/clock.png")}
+            source={require("../../assets/icons/clock.png")}
             style={styles.iconBar}
           />
           <Text style={styles.textIcon}>Filas</Text>
@@ -39,7 +39,7 @@ export default function NavigationBar({state, descriptors, navigation}: BottomTa
         >
         <View style={styles.containerIcon}>
           <Image
-            source={require("../assets/icons/engrenagem.png")}
+            source={require("../../assets/icons/engrenagem.png")}
             style={styles.iconBar}
           />
           <Text style={styles.textIcon}>Configurações</Text>
