@@ -21,22 +21,17 @@
     },
     "web": {
       "output": "single",
-      "favicon": ".assets/images/logoNext.png"
+      "favicon": "./assets/images/logoNext.png"
     },
-    "plugins": [
-      [
-        "expo-splash-screen",
-        {
-          "image": "./app/assets/images/log.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
-          "dark": {
-            "backgroundColor": "#000000"
-          }
-        }
-      ]
-    ],
+    "splash": {
+      "image": "./assets/images/log.png",
+      "imageWidth": 200,
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff",
+      "dark": {
+        "backgroundColor": "#000000"
+      }
+    },
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": false

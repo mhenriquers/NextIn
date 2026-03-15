@@ -18,12 +18,15 @@ import { useAuth } from "../context/AuthContext";
 // estrutura do app
 
 
-function logar(email: any, senha: any, navigation: any) {
-  const { login } = useAuth()
-  if (email === "teste@gmail.com" && senha === "teste")
-    login()
-}
+{/*function logar(email: any, senha: any, navigation: any) {
+  
+  
+}*/}
+
 export default function Login({ navigation }: { navigation: any }) {
+  const { login } = useAuth()
+
+
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [lembrarEmail, setLembrarEmail] = useState("");
   const [senha, setSenha] = useState('');
@@ -31,6 +34,11 @@ export default function Login({ navigation }: { navigation: any }) {
   async function handleLogin() {
     await AsyncStorage.setItem("email", lembrarEmail); //salva o email
     await AsyncStorage.setItem("lembrar", "true"); // salva que o programa deve lembrar do email quando iniciar
+    
+    //validação simples
+    if (lembrarEmail === "teste@gmail.com" && senha === "teste")
+    login()
+  
   }
 
   useEffect(() => {
@@ -120,8 +128,6 @@ export default function Login({ navigation }: { navigation: any }) {
               <Pressable
                 onPress={() => {
                   handleLogin();
-                  logar(lembrarEmail, senha, navigation );
-                  ;
                 }}
                 style={({ pressed }) => [
                   styles.botao,
