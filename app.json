@@ -1,40 +1,29 @@
 {
   "expo": {
-    "name": "nextin",
-    "slug": "nextin",
+    "name": "Nextin",
+    "slug": "Nextin",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/log.png",
-    "scheme": "virtualstack",
-    "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/log.png",
-        "backgroundImage": "./assets/images/log.png",
-        "monochromeImage": "./assets/images/log.png"
-      },
-      "predictiveBackGestureEnabled": false
-    },
-    "web": {
-      "output": "single",
-      "favicon": "./assets/images/logoNext.png"
-    },
-    "splash": {
-      "image": "./assets/images/log.png",
-      "imageWidth": 200,
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-      "dark": {
-        "backgroundColor": "#000000"
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
       }
     },
-    "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": false
+    "web": {
+      "favicon": "./assets/favicon.png"
     }
   }
 }
