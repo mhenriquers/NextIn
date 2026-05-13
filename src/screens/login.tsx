@@ -10,6 +10,7 @@ import {
   Pressable,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -17,28 +18,30 @@ import { useAuth } from "../context/AuthContext";
 
 // estrutura do app
 
-
-{/*function logar(email: any, senha: any, navigation: any) {
+{
+  /*function logar(email: any, senha: any, navigation: any) {
   
   
-}*/}
+}*/
+}
 
 export default function Login({ navigation }: { navigation: any }) {
-  const { login } = useAuth()
-
+  const { login } = useAuth();
 
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [lembrarEmail, setLembrarEmail] = useState("");
-  const [senha, setSenha] = useState('');
+  const [senha, setSenha] = useState("");
 
   async function handleLogin() {
-    await AsyncStorage.setItem("email", lembrarEmail); //salva o email
-    await AsyncStorage.setItem("lembrar", "true"); // salva que o programa deve lembrar do email quando iniciar
-    
     //validação simples
-    if (lembrarEmail === "teste@gmail.com" && senha === "teste")
-    login()
-  
+    if (lembrarEmail === "teste@gmail.com" && senha === "teste") {
+      await AsyncStorage.setItem("email", lembrarEmail); //salva o email
+      await AsyncStorage.setItem("lembrar", "true"); // salva que o programa deve lembrar do email quando iniciar
+
+      login();
+    } else {
+      Alert.alert("Email ou senha incorretos.");
+    }
   }
 
   useEffect(() => {
