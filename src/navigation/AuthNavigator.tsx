@@ -11,7 +11,13 @@ const Stack = createNativeStackNavigator();
 export default function AuthNavigation() {
   const { isLoggedIn } = useAuth(); // pega a informação de estar logado
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true, // Habilita o gesto de deslizar para voltar,
+        gestureDirection: "horizontal", // Define a direção do gesto para horizontal,
+      }}
+    >
       {isLoggedIn ? (
         <>
           <Stack.Screen name="TabNavigator" component={TabNavigator} />

@@ -34,7 +34,7 @@ export default function Login({ navigation }: { navigation: any }) {
 
   async function handleLogin() {
     //validação simples
-    if (lembrarEmail === "teste@gmail.com" && senha === "teste") {
+    if (lembrarEmail === "teste@gmail.com" && senha === "Teste") {
       await AsyncStorage.setItem("email", lembrarEmail); //salva o email
       await AsyncStorage.setItem("lembrar", "true"); // salva que o programa deve lembrar do email quando iniciar
 
@@ -58,7 +58,7 @@ export default function Login({ navigation }: { navigation: any }) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Image
-            source={require("../../assets/images/logoNext.png")}
+            source={require("../../assets/images/log-Photoroom.png")}
             style={styles.logo}
           />
           <View style={styles.box}>
@@ -116,15 +116,18 @@ export default function Login({ navigation }: { navigation: any }) {
               </View>
             </View>
             <View style={styles.containerCheck}>
-              <TouchableOpacity>
-                <Text
-                  onPress={() => navigation.navigate("logproblem")}
-                  style={styles.labelCheck}
-                >
-                  {" "}
-                  Problemas com login?
-                </Text>
-              </TouchableOpacity>
+              <Pressable
+                onPress={() => navigation.navigate("logproblem")}
+                style={styles.areaLink}
+              >
+                {({ pressed }) => (
+                  <Text
+                    style={[styles.labelCheck, { opacity: pressed ? 0.6 : 1 }]}
+                  >
+                    Problemas com login?
+                  </Text>
+                )}
+              </Pressable>
             </View>
 
             <View style={styles.containerBotao}>

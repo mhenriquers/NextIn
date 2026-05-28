@@ -14,33 +14,45 @@ import {
 
 // estrutura do app
 
-export default function Logproblem() {
-
+export default function Logproblem({ navigation }: { navigation: any }) {
   return (
-    <View style={{ flex: 1 }}>
-
+    <View style={{ flex: 1, backgroundColor: "#FFFDD0" }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          {/* CONTAINER DO CABEÇALHO (Garante que a seta fique no topo esquerdo) */}
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()} // Faz voltar para o Login
+              style={styles.areaBotaoVoltar}
+            >
+              <Image
+                source={require("../../assets/icons/arrow-back.png")}
+                style={styles.arrowBack}
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* LOGO E CONTEÚDO CONTINUAM EMBAIXO */}
           <Image
-            source={require("../../assets/images/logoNext.png")}
+            source={require("../../assets/images/log-Photoroom.png")}
             style={styles.logo}
           />
           <View style={styles.box}>
-
             <Text style={styles.titulo}>Insira seu nome de usuário</Text>
             <View style={styles.containerInput}>
               <Text style={styles.labelName}>Insira seu nome de usuário</Text>
 
               <View style={styles.container2}>
-
-                <TextInput
-                  style={styles.input}
-                ></TextInput>
+                <TextInput style={styles.input}></TextInput>
               </View>
             </View>
 
-            <View style={styles.containerBotao}>
+            <View>
               <Pressable
+                style={({ pressed }) => [
+                  styles.containerBotao,
+                  { opacity: pressed ? 0.6 : 1 },
+                ]}
               >
                 <Text style={styles.botaoText}> Login </Text>
               </Pressable>
@@ -53,11 +65,10 @@ export default function Logproblem() {
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: '#FFFDD0',
+    backgroundColor: "#FFFDD0",
   },
 
   fundo: {
@@ -68,7 +79,31 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: -1,
   },
+  // Cria uma linha invisível no topo da tela para alinhar os elementos
+  header: {
+    width: "100%",
+    height: "100%", // Espaço para não ficar colado na barra de bateria do celular
+    paddingHorizontal: 10,
+    justifyContent: "center", // Alinha verticalmente
+    alignItems: "flex-start", // Força a seta a ir para a extrema esquerda
+    position: "absolute", // Garante que o header fique sobreposto ao restante do conteúdo
+    zIndex: -1, // Garante que o header fique acima do restante do conteúdo
+    justifyContent: "center", // Centraliza verticalmente a seta dentro do header
+  },
 
+  // Aumenta a área de toque (UX boa: o usuário não precisa acertar milimetricamente o ícone)
+  areaBotaoVoltar: {
+    padding: 10,
+  },
+
+  // Ajusta o tamanho real do ícone da seta
+  arrowBack: {
+    width: 30, // 50 estava muito grande para uma seta de voltar padrão
+    height: 30,
+    resizeMode: "contain",
+    position: "absolute",
+    alignSelf: "center",
+  },
   input: {
     backgroundColor: "#00",
     padding: 5,
@@ -88,7 +123,7 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "50%",
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: "rgba(0,0,0)",
   },
 
