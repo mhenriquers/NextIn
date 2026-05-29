@@ -11,9 +11,9 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Alert,
+  BackHandler,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useAuth } from "../context/AuthContext";
 
 // estrutura do app
@@ -55,97 +55,105 @@ export default function Login({ navigation }: { navigation: any }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <Image
-            source={require("../../assets/images/log-Photoroom.png")}
-            style={styles.logo}
-          />
-          <View style={styles.box}>
+      <ImageBackground
+        source={require("../../assets/images/bgabstract.png")}
+        style={styles.background}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.container}>
             <Image
-              source={require("../../assets/images/perfil.png")}
-              style={styles.imgPerfil}
+              source={require("../../assets/images/log-Photoroom.png")}
+              style={styles.logo}
             />
-            <Text style={styles.login}>Login</Text>
-            <View style={styles.containerInput}>
-              <Text style={styles.labelName}>Usuário</Text>
+            <View style={styles.box}>
+              <Image
+                source={require("../../assets/images/perfil.png")}
+                style={styles.imgPerfil}
+              />
+              <Text style={styles.login}>Login</Text>
+              <View style={styles.containerInput}>
+                <Text style={styles.labelName}>Usuário</Text>
 
-              <View style={styles.container2}>
-                <Image
-                  source={require("../../assets/images/iconPerson.png")}
-                  style={styles.iconInput}
-                />
-
-                <TextInput
-                  style={styles.input}
-                  placeholder="Exemplo@gmail.com"
-                  placeholderTextColor={"#999"}
-                  value={lembrarEmail}
-                  onChangeText={setLembrarEmail}
-                ></TextInput>
-              </View>
-            </View>
-            <View style={styles.containerInput}>
-              <Text style={styles.labelName}>Senha</Text>
-              <View style={styles.container2}>
-                <Image
-                  source={require("../../assets/images/iconLock.png")}
-                  style={styles.iconInput}
-                />
-                <TouchableOpacity
-                  style={styles.containerEye}
-                  onPress={() => setMostrarSenha(!mostrarSenha)}
-                >
+                <View style={styles.container2}>
                   <Image
-                    source={
-                      mostrarSenha
-                        ? require("../../assets/images/eyeSee.png")
-                        : require("../../assets/images/eyeNotSee.png")
-                    }
-                    style={styles.iconEye}
+                    source={require("../../assets/images/iconPerson.png")}
+                    style={styles.iconInput}
                   />
-                </TouchableOpacity>
-                <TextInput
-                  secureTextEntry={!mostrarSenha}
-                  style={styles.input}
-                  placeholder="sua senha"
-                  placeholderTextColor={"#999"}
-                  value={senha}
-                  onChangeText={setSenha}
-                ></TextInput>
-              </View>
-            </View>
-            <View style={styles.containerCheck}>
-              <Pressable
-                onPress={() => navigation.navigate("logproblem")}
-                style={styles.areaLink}
-              >
-                {({ pressed }) => (
-                  <Text
-                    style={[styles.labelCheck, { opacity: pressed ? 0.6 : 1 }]}
-                  >
-                    Problemas com login?
-                  </Text>
-                )}
-              </Pressable>
-            </View>
 
-            <View style={styles.containerBotao}>
-              <Pressable
-                onPress={() => {
-                  handleLogin();
-                }}
-                style={({ pressed }) => [
-                  styles.botao,
-                  { backgroundColor: pressed ? "#2846a0" : "#3e6eff" },
-                ]}
-              >
-                <Text style={styles.botaoText}> Login </Text>
-              </Pressable>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Exemplo@gmail.com"
+                    placeholderTextColor={"#999"}
+                    value={lembrarEmail}
+                    onChangeText={setLembrarEmail}
+                  ></TextInput>
+                </View>
+              </View>
+              <View style={styles.containerInput}>
+                <Text style={styles.labelName}>Senha</Text>
+                <View style={styles.container2}>
+                  <Image
+                    source={require("../../assets/images/iconLock.png")}
+                    style={styles.iconInput}
+                  />
+                  <TouchableOpacity
+                    style={styles.containerEye}
+                    onPress={() => setMostrarSenha(!mostrarSenha)}
+                  >
+                    <Image
+                      source={
+                        mostrarSenha
+                          ? require("../../assets/images/eyeSee.png")
+                          : require("../../assets/images/eyeNotSee.png")
+                      }
+                      style={styles.iconEye}
+                    />
+                  </TouchableOpacity>
+                  <TextInput
+                    secureTextEntry={!mostrarSenha}
+                    style={styles.input}
+                    placeholder="sua senha"
+                    placeholderTextColor={"#999"}
+                    value={senha}
+                    onChangeText={setSenha}
+                  ></TextInput>
+                </View>
+              </View>
+              <View style={styles.containerCheck}>
+                <Pressable
+                  onPress={() => navigation.navigate("logproblem")}
+                  style={styles.areaLink}
+                >
+                  {({ pressed }) => (
+                    <Text
+                      style={[
+                        styles.labelCheck,
+                        { opacity: pressed ? 0.6 : 1 },
+                      ]}
+                    >
+                      Problemas com login?
+                    </Text>
+                  )}
+                </Pressable>
+              </View>
+
+              <View style={styles.containerBotao}>
+                <Pressable
+                  onPress={() => {
+                    handleLogin();
+                  }}
+                  style={({ pressed }) => [
+                    styles.botao,
+                    { backgroundColor: pressed ? "#2846a0" : "#3e6eff" },
+                  ]}
+                >
+                  <Text style={styles.botaoText}> Login </Text>
+                </Pressable>
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     </View>
   );
 }
@@ -154,9 +162,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#FFFDD0",
   },
 
+  background: {
+    position: "absolute",
+    zIndex: -1,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flex: 1,
+  },
   texto: {
     fontSize: 20,
     fontWeight: "bold",

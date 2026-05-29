@@ -16,50 +16,55 @@ import {
 
 export default function Logproblem({ navigation }: { navigation: any }) {
   return (
-    <View style={{ flex: 1, backgroundColor: "#FFFDD0" }}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          {/* CONTAINER DO CABEÇALHO (Garante que a seta fique no topo esquerdo) */}
-          <View style={styles.header}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()} // Faz voltar para o Login
-              style={styles.areaBotaoVoltar}
-            >
-              <Image
-                source={require("../../assets/icons/arrow-back.png")}
-                style={styles.arrowBack}
-              />
-            </TouchableOpacity>
-          </View>
+    <View style={{ flex: 1 }}>
+      <ImageBackground
+        source={require("../../assets/images/bgabstract.png")}
+        style={styles.background}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.container}>
+            {/* CONTAINER DO CABEÇALHO (Garante que a seta fique no topo esquerdo) */}
+            <View style={styles.header}>
+              <TouchableOpacity
+                onPress={() => navigation.goBack()} // Faz voltar para o Login
+                style={styles.areaBotaoVoltar}
+              >
+                <Image
+                  source={require("../../assets/icons/arrow-back.png")}
+                  style={styles.arrowBack}
+                />
+              </TouchableOpacity>
+            </View>
 
-          {/* LOGO E CONTEÚDO CONTINUAM EMBAIXO */}
-          <Image
-            source={require("../../assets/images/log-Photoroom.png")}
-            style={styles.logo}
-          />
-          <View style={styles.box}>
-            <Text style={styles.titulo}>Insira seu nome de usuário</Text>
-            <View style={styles.containerInput}>
-              <Text style={styles.labelName}>Insira seu nome de usuário</Text>
+            {/* LOGO E CONTEÚDO CONTINUAM EMBAIXO */}
+            <Image
+              source={require("../../assets/images/log-Photoroom.png")}
+              style={styles.logo}
+            />
+            <View style={styles.box}>
+              <Text style={styles.titulo}>Insira seu nome de usuário</Text>
+              <View style={styles.containerInput}>
+                <Text style={styles.labelName}>Insira seu nome de usuário</Text>
 
-              <View style={styles.container2}>
-                <TextInput style={styles.input}></TextInput>
+                <View style={styles.container2}>
+                  <TextInput style={styles.input}></TextInput>
+                </View>
+              </View>
+
+              <View>
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.containerBotao,
+                    { opacity: pressed ? 0.6 : 1 },
+                  ]}
+                >
+                  <Text style={styles.botaoText}> Login </Text>
+                </Pressable>
               </View>
             </View>
-
-            <View>
-              <Pressable
-                style={({ pressed }) => [
-                  styles.containerBotao,
-                  { opacity: pressed ? 0.6 : 1 },
-                ]}
-              >
-                <Text style={styles.botaoText}> Login </Text>
-              </Pressable>
-            </View>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     </View>
   );
 }
@@ -68,7 +73,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#FFFDD0",
+  },
+
+  background: {
+    position: "absolute",
+    zIndex: -1,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flex: 1,
   },
 
   fundo: {
