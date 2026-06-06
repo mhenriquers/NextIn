@@ -4,7 +4,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Configuracoes from "../screens/configuracoes";
 import Fila from "../screens/fila";
 import Home from "../screens/home";
-import NavigationBar from "./NavigationBar";
+import perfil from "../screens/perfil";
+
+//componentes
+
+import NavigationBar from "../components/NavigationBar";
+import HeaderGlobal from "../components/Header";
 import {
   SafeAreaInsetsContext,
   useSafeAreaInsets,
@@ -23,13 +28,14 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        header: () => <HeaderGlobal />,
       }}
       tabBar={(props) => <NavigationBar {...props} safeStyle={tabBarStyle} />}
     >
       <Tab.Screen name="home" component={Home} />
       <Tab.Screen name="fila" component={Fila} />
       <Tab.Screen name="configuracoes" component={Configuracoes} />
+      <Tab.Screen name="perfil" component={perfil} />
     </Tab.Navigator>
   );
 }

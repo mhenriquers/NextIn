@@ -36,7 +36,7 @@ export default function Login({ navigation }: { navigation: any }) {
   function transicionarTela(novaTela: "login" | "lembrado" | "problema") {
     // 💡 ISOLAMENTO: Se a nova tela for 'login', o app entra aqui,
     // muda de tela instantaneamente e mata o resto da função (sem afetar as outras)
-    if (novaTela === "login") {
+    if (telaAtual === "lembrado" && novaTela === "login") {
       setTelaAtual("login");
       posicaoX.setValue(0); // Teleporta o box direto para o centro, sem deslizar
       return; // O 'return' para a função aqui. As linhas de baixo nem são lidas.
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
 
   bgColor: {
     flex: 1,
-    backgroundColor: "#FAF6EE",
+    backgroundColor: "#fcf9f4",
     zIndex: -1,
   },
 
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
 
   logo: {
     marginTop: 10,
-    marginBottom: 50,
+    marginBottom: Platform.OS === "ios" ? 20 : 50,
     width: 300,
     height: 100,
   },
@@ -435,6 +435,7 @@ const styles = StyleSheet.create({
   },
 
   containerInput: {
+    marginTop: 5,
     width: "85%",
     alignItems: "center",
   },

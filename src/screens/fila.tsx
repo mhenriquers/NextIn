@@ -13,7 +13,7 @@ export default function Fila() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FAF6EE",
+    backgroundColor: "#fffcf8",
     alignItems: "center",
     justifyContent: "center",
   },

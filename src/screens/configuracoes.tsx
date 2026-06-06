@@ -26,13 +26,13 @@ export default function Configuracoes({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#222",
+    backgroundColor: "#fffcf8",
     alignItems: "center",
     justifyContent: "center",
   },
   buttonContainer: {
     borderWidth: 1,
-    borderColor: "#fff",
+    borderColor: "#000",
     backgroundColor: "#911",
     padding: 10,
     borderRadius: 5,
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
   texto: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#000000",
   },
 });
