@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
   },
 
-  box: {
+  boxlog: {
     borderRadius: 10,
     width: "80%",
     height: "50%",

@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface CustomTabBarProps extends BottomTabBarProps {
   safeStyle?: ViewStyle;
@@ -20,7 +21,10 @@ export default function NavigationBar({
   safeStyle,
 }: CustomTabBarProps) {
   return (
-    <View style={[styles.containerNav, safeStyle]}>
+    <SafeAreaView
+      style={[styles.containerNav, safeStyle]}
+      edges={["left", "right"]}
+    >
       <TouchableOpacity
         style={styles.tabButton}
         onPress={() => navigation.navigate("home")}
@@ -59,18 +63,15 @@ export default function NavigationBar({
           <Text style={styles.textIcon}>Configurações</Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   containerNav: {
     width: "100%",
-    height: 70,
-    borderWidth: 1,
-    borderColor: "#000",
+    height: 60,
     flexDirection: "row",
-    borderRadius: 0,
     alignItems: "center",
     backgroundColor: "#0d0d0d",
   },

@@ -1,37 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../../assets/images/bgabstract.png")}
-        style={styles.background}
-      >
-        <Text style={styles.text}>Olá Home</Text>
-      </ImageBackground>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>Olá Home</Text>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  background: {
-    position: "absolute",
-    zIndex: -1,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    flex: 1,
-    blurradius: 10,
-    justifyContent: "center",
+    backgroundColor: "#FAF6EE",
     alignItems: "center",
+    justifyContent: "center",
   },
+
   text: {
-    color: "#FFF",
+    color: "#000",
     fontSize: 24,
     fontWeight: "bold",
   },

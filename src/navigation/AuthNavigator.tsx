@@ -16,6 +16,7 @@ export default function AuthNavigation() {
         headerShown: false,
         gestureEnabled: true, // Habilita o gesto de deslizar para voltar,
         gestureDirection: "horizontal", // Define a direção do gesto para horizontal,
+        animation: "fade", // Define a animação de transição para fade
       }}
     >
       {isLoggedIn ? (

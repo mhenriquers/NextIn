@@ -2,12 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../context/AuthContext";
 import { Login } from "./login";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Configuracoes({ navigation }: { navigation: any }) {
   const { logout } = useAuth();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() => {
@@ -18,7 +19,7 @@ export default function Configuracoes({ navigation }: { navigation: any }) {
         </TouchableOpacity>
       </View>
       <Text style={styles.texto}>Olá configurações</Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
