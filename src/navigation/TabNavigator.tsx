@@ -5,6 +5,7 @@ import Configuracoes from "../screens/configuracoes";
 import Fila from "../screens/fila";
 import Home from "../screens/home";
 import perfil from "../screens/perfil";
+import { FilaProvider } from "../context/FilaContext";
 
 //componentes
 
@@ -26,16 +27,18 @@ export default function TabNavigator() {
     height: 60 + (insets.bottom > 0 ? insets.bottom : 0),
   };
   return (
-    <Tab.Navigator
-      screenOptions={{
-        header: () => <HeaderGlobal />,
-      }}
-      tabBar={(props) => <NavigationBar {...props} safeStyle={tabBarStyle} />}
-    >
-      <Tab.Screen name="home" component={Home} />
-      <Tab.Screen name="fila" component={Fila} />
-      <Tab.Screen name="configuracoes" component={Configuracoes} />
-      <Tab.Screen name="perfil" component={perfil} />
-    </Tab.Navigator>
+    <FilaProvider>
+      <Tab.Navigator
+        screenOptions={{
+          header: () => <HeaderGlobal />,
+        }}
+        tabBar={(props) => <NavigationBar {...props} safeStyle={tabBarStyle} />}
+      >
+        <Tab.Screen name="home" component={Home} />
+        <Tab.Screen name="fila" component={Fila} />
+        <Tab.Screen name="configuracoes" component={Configuracoes} />
+        <Tab.Screen name="perfil" component={perfil} />
+      </Tab.Navigator>
+    </FilaProvider>
   );
 }

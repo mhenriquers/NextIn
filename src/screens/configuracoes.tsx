@@ -1,53 +1,55 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useAuth } from "../context/AuthContext";
-import { Login } from "./login";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "../context/AuthContext";
 
-export default function Configuracoes({ navigation }: { navigation: any }) {
+const Configuracoes: React.FC = () => {
   const { logout } = useAuth();
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Olá configurações</Text>
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => {
-            logout();
-          }}
+          style={styles.logoutButton}
+          onPress={logout}
+          activeOpacity={0.7}
         >
           <Text style={styles.buttonText}>Sair</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.texto}>Olá configurações</Text>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fffcf8",
-    alignItems: "center",
+    backgroundColor: "#fffcf8", // Bege NextIn
+    padding: 20,
     justifyContent: "center",
   },
+  title: {
+    fontSize: 24,
+    color: "#000000", // Preto NextIn
+    textAlign: "center",
+    marginBottom: 40,
+  },
   buttonContainer: {
-    borderWidth: 1,
-    borderColor: "#000",
-    backgroundColor: "#911",
-    padding: 10,
-    borderRadius: 5,
-    position: "absolute",
-    top: 50,
-    right: 20,
+    width: "100%",
+  },
+  logoutButton: {
+    backgroundColor: "#FF3B30", // Vermelho NextIn
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: "center",
   },
   buttonText: {
-    color: "#fff",
+    color: "#fffcf8",
+    fontSize: 16,
     fontWeight: "bold",
-    paddingHorizontal: 10,
-  },
-  texto: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#000000",
   },
 });
+
+export default Configuracoes;

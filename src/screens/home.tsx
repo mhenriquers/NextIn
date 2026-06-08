@@ -1,12 +1,36 @@
 // src/screens/Home.tsx
 import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { useFila } from "../context/FilaContext";
+import ClienteDetalhesModal, {
+  ClienteFila,
+} from "../components/ClienteDetalhesModal";
+import { useState } from "react";
 
 // Pegamos a largura da tela do celular para calcular o tamanho dos cards matematicamente
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = (width - 50) / 2; // Divide o espaço igualmente entre os dois cards descontando as margens
 
 export default function Home() {
+  const { fila, removerCliente } = useFila();
+  const [detalhesVisible, setDetalhesVisible] = useState(false);
+  const primeiroCliente = fila[0] || null;
+
+  const handleChamar = (cliente: ClienteFila | null) => {
+    if (!cliente) return;
+    Alert.alert("Chamar Cliente", `Chamando ${cliente.nome} para a mesa.`);
+  };
+
+  const handleSentar = (id: string) => {
+    removerCliente(id);
+  };
   return (
     <View style={styles.containerTela}>
       {/* Bloco de Boas-Vindas */}
@@ -46,13 +70,31 @@ export default function Home() {
       </View>
 
       {/* Seção de Destaque: Próximo da Fila */}
-      <View style={styles.nextCustomerBox}>
-        <Text style={styles.nextLabel}>PRÓXIMO CLIENTE DA FILA</Text>
-        <View style={styles.nextInfoRow}>
-          <Text style={styles.nextName}>Matheus Henrique</Text>
-          <Text style={styles.nextBadge}>Mesa p/ 4</Text>
+      {primeiroCliente ? (
+        <TouchableOpacity
+          style={styles.nextCustomerBox}
+          onPress={() => setDetalhesVisible(true)}
+        >
+          <Text style={styles.nextLabel}>PRÓXIMO CLIENTE DA FILA</Text>
+          <View style={styles.nextInfoRow}>
+            <Text style={styles.nextName}>{primeiroCliente.nome}</Text>
+            <Text style={styles.nextBadge}>
+              Mesa p/ {primeiroCliente.pessoas}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.nextCustomerBox}>
+          <Text style={styles.nextLabel}>NENHUM CLIENTE NA FILA</Text>
         </View>
-      </View>
+      )}
+      <ClienteDetalhesModal
+        visible={detalhesVisible}
+        cliente={primeiroCliente}
+        onClose={() => setDetalhesVisible(false)}
+        onChamar={() => handleChamar(primeiroCliente!)}
+        onSentar={() => handleSentar(primeiroCliente!.id)}
+      />
     </View>
   );
 }
