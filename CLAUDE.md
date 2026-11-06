@@ -61,7 +61,7 @@ src/
     NavigationBar.tsx     # tab bar branca: Início, Fila (badge c/ tamanho da fila), Ajustes; aba ativa com pílula azul animada; trata safe area. Rotas fora de ABAS (perfil) ficam ocultas
     CustomModal.tsx       # modal genérico com fade + scale animados
     FormNovoCliente.tsx   # formulário: nome, pessoas, WhatsApp, observações (com validação via Alert)
-    ClienteDetalhesModal.tsx # detalhes do cliente + botões Chamar/Sentar
+    ClienteDetalhesModal.tsx # bottom sheet (sobe de baixo): cabeçalho c/ avatar e posição, espera ao vivo (1 s, cor por tempo), pessoas/chegada, contato WhatsApp ("Avisar" abre wa.me), observações, Chamar/Sentar
     MaskedPhoneInput.tsx  # input com máscara (XX) XXXXX-XXXX + validação em tempo real
     PhoneValidator.tsx    # utilitários libphonenumber: validarTelefone, formatarTelefone, extrairDDD, ehCelular
   services/  styles/  types/  # pastas vazias (só txt.txt explicativo) — reservadas p/ API, estilos e tipos
@@ -127,13 +127,13 @@ index.js
 
 Ao mexer nessas áreas, considere corrigir:
 
-1. **Tipo `ClienteFila` ainda redeclarado** em `fila.tsx` e `ClienteDetalhesModal.tsx` — trocar por `import { ClienteFila } from "../context/FilaContext"`.
+1. **Tipo `ClienteFila` ainda redeclarado** em `fila.tsx` — trocar por `import { ClienteFila } from "../context/FilaContext"`.
 2. Erros de TS restantes: `styles.box` inexistente + chave duplicada em `logproblem.tsx` (tela não usada — candidata a remoção).
 3. Telas fora da Home ainda usam o visual antigo — alinhar à paleta/estilo da nova Home.
 4. `MOCK_DATA` em `fila.tsx` não é usado (dados mock vivem no contexto).
 5. Os KPIs da Home não contam mesas (não há modelo de mesas ainda).
 6. `fila.tsx` usa non-null assertion `clienteSelecionado!` nos handlers do modal.
-7. `calcularTempoEspera` duplicado em `fila.tsx` e `ClienteDetalhesModal.tsx`; o modal não atualiza o tempo em tempo real.
+7. Lógica de tempo de espera (formatar/cor) repetida em `home.tsx`, `fila.tsx` e `ClienteDetalhesModal.tsx` — extrair para um util compartilhado.
 8. Arquivos mortos: `App.js`, `RootNavigator.tsx`, `ClienteFilaCard.tsx` (em `screens/` mas é componente), `logproblem.tsx` (praticamente substituída), imports não usados (`ImageBackground`, `BackHandler`, `SafeAreaInsetsContext`, etc.).
 9. `perfil.tsx` usa `SafeAreaView` de `react-native` (as outras telas usam de `react-native-safe-area-context`).
 10. Header (`Header.tsx`) ainda usa ícones PNG e visual antigo — alinhar ao estilo da barra/login.
