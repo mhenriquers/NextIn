@@ -22,6 +22,7 @@ interface ClienteDetalhesModalProps {
   visible: boolean;
   cliente: ClienteFila | null;
   onClose: () => void;
+  onChamar: () => void;
   onSentar: () => void;
 }
 

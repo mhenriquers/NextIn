@@ -1,113 +1,220 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ViewStyle,
-} from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, Text, StyleSheet, Pressable, Animated } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
+import { useFila } from "../context/FilaContext";
 
-interface CustomTabBarProps extends BottomTabBarProps {
-  safeStyle?: ViewStyle;
-}
+// ---------------------------------------------------------------- Paleta
+const C = {
+  superficie: "#FFFFFF",
+  borda: "#ECE8DF",
+  inativo: "#9CA3AF",
+  primaria: "#3E6EFF",
+  perigo: "#E5484D",
+};
 
-export default function NavigationBar({
-  state,
-  descriptors,
-  navigation,
-  safeStyle,
-}: CustomTabBarProps) {
+type IconName = React.ComponentProps<typeof Ionicons>["name"];
+
+// Abas exibidas na barra (rotas fora desta lista, como "perfil", ficam ocultas)
+const ABAS: Record<
+  string,
+  { rotulo: string; icone: IconName; iconeAtivo: IconName }
+> = {
+  home: { rotulo: "Início", icone: "home-outline", iconeAtivo: "home" },
+  fila: { rotulo: "Fila", icone: "time-outline", iconeAtivo: "time" },
+  configuracoes: {
+    rotulo: "Ajustes",
+    icone: "settings-outline",
+    iconeAtivo: "settings",
+  },
+};
+
+// ---------------------------------------------------------------- Item da barra
+function ItemAba({
+  rotulo,
+  icone,
+  ativo,
+  badge,
+  onPress,
+  onLongPress,
+}: {
+  rotulo: string;
+  icone: IconName;
+  ativo: boolean;
+  badge?: number;
+  onPress: () => void;
+  onLongPress: () => void;
+}) {
+  const progresso = useRef(new Animated.Value(ativo ? 1 : 0)).current;
+
+  useEffect(() => {
+    Animated.spring(progresso, {
+      toValue: ativo ? 1 : 0,
+      useNativeDriver: true,
+      friction: 7,
+      tension: 80,
+    }).start();
+  }, [ativo, progresso]);
+
   return (
-    <SafeAreaView
-      style={[styles.containerNav, safeStyle]}
-      edges={["left", "right"]}
+    <Pressable
+      onPress={onPress}
+      onLongPress={onLongPress}
+      style={styles.item}
+      accessibilityRole="tab"
+      accessibilityState={{ selected: ativo }}
+      accessibilityLabel={badge ? `${rotulo}, ${badge} na fila` : rotulo}
     >
-      <TouchableOpacity
-        style={styles.tabButton}
-        onPress={() => navigation.navigate("home")}
+      <View style={styles.iconeArea}>
+        {/* Pílula de destaque da aba ativa */}
+        <Animated.View
+          style={[
+            styles.pilula,
+            {
+              opacity: progresso,
+              transform: [
+                {
+                  scaleX: progresso.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0.5, 1],
+                  }),
+                },
+              ],
+            },
+          ]}
+        />
+        <Ionicons
+          name={icone}
+          size={22}
+          color={ativo ? C.primaria : C.inativo}
+        />
+        {!!badge && (
+          <View style={styles.badge}>
+            <Text style={styles.badgeTexto}>{badge > 99 ? "99+" : badge}</Text>
+          </View>
+        )}
+      </View>
+      <Text
+        style={[
+          styles.rotulo,
+          ativo ? styles.rotuloAtivo : { color: C.inativo },
+        ]}
+        numberOfLines={1}
       >
-        <View style={styles.containerIcon}>
-          <Image
-            source={require("../../assets/icons/home.png")}
-            style={styles.iconBar}
-          />
-          <Text style={styles.textIcon}>Home</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.tabButton}
-        onPress={() => navigation.navigate("fila")}
-      >
-        <View style={styles.containerIcon2}>
-          <Image
-            source={require("../../assets/icons/clock.png")}
-            style={styles.iconBar}
-          />
-          <Text style={styles.textIcon}>Filas</Text>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.tabButton}
-        onPress={() => navigation.navigate("configuracoes")}
-      >
-        <View style={styles.containerIcon3}>
-          <Image
-            source={require("../../assets/icons/engrenagem.png")}
-            style={styles.iconBar}
-          />
-          <Text style={styles.textIcon}>Configurações</Text>
-        </View>
-      </TouchableOpacity>
-    </SafeAreaView>
+        {rotulo}
+      </Text>
+    </Pressable>
   );
 }
 
-const styles = StyleSheet.create({
-  containerNav: {
-    width: "100%",
-    height: 60,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#0d0d0d",
-  },
+// ---------------------------------------------------------------- Barra
+export default function NavigationBar({
+  state,
+  navigation,
+}: BottomTabBarProps) {
+  const insets = useSafeAreaInsets();
+  const { fila } = useFila();
+  const rotaAtiva = state.routes[state.index]?.name;
 
-  tabButton: {
+  return (
+    <View
+      style={[styles.barra, { paddingBottom: Math.max(insets.bottom, 10) }]}
+    >
+      {state.routes
+        .filter((rota) => ABAS[rota.name])
+        .map((rota) => {
+          const aba = ABAS[rota.name];
+          const ativo = rota.name === rotaAtiva;
+
+          const onPress = () => {
+            const evento = navigation.emit({
+              type: "tabPress",
+              target: rota.key,
+              canPreventDefault: true,
+            });
+            if (!ativo && !evento.defaultPrevented) {
+              navigation.navigate(rota.name);
+            }
+          };
+
+          const onLongPress = () => {
+            navigation.emit({ type: "tabLongPress", target: rota.key });
+          };
+
+          return (
+            <ItemAba
+              key={rota.key}
+              rotulo={aba.rotulo}
+              icone={ativo ? aba.iconeAtivo : aba.icone}
+              ativo={ativo}
+              badge={rota.name === "fila" ? fila.length : undefined}
+              onPress={onPress}
+              onLongPress={onLongPress}
+            />
+          );
+        })}
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------- Estilos
+const styles = StyleSheet.create({
+  barra: {
+    flexDirection: "row",
+    backgroundColor: C.superficie,
+    borderTopWidth: 1,
+    borderTopColor: C.borda,
+    paddingTop: 8,
+    paddingHorizontal: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    elevation: 12,
+  },
+  item: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    gap: 4,
   },
-
-  containerIcon: {
+  iconeArea: {
+    width: 64,
+    height: 32,
     alignItems: "center",
-    marginLeft: "9.9%",
-    marginRight: "9.9%",
+    justifyContent: "center",
   },
-
-  containerIcon2: {
+  pilula: {
+    ...StyleSheet.absoluteFill,
+    borderRadius: 16,
+    backgroundColor: C.primaria + "1A",
+  },
+  badge: {
+    position: "absolute",
+    top: 0,
+    right: 12,
+    minWidth: 18,
+    height: 18,
+    paddingHorizontal: 4,
+    borderRadius: 9,
+    backgroundColor: C.perigo,
+    borderWidth: 2,
+    borderColor: C.superficie,
     alignItems: "center",
-    marginLeft: "11%",
-    marginRight: "11%",
+    justifyContent: "center",
   },
-
-  containerIcon3: {
-    alignItems: "center",
-    marginLeft: "2.8%",
-    marginRight: "2.8%",
-  },
-
-  iconBar: {
-    width: 25,
-    height: 25,
-    padding: 0,
-    paddingTop: 5,
-  },
-
-  textIcon: {
+  badgeTexto: {
     color: "#FFF",
+    fontSize: 10,
+    fontWeight: "700",
+  },
+  rotulo: {
+    fontSize: 12,
+    fontWeight: "500",
+  },
+  rotuloAtivo: {
+    color: C.primaria,
+    fontWeight: "700",
   },
 });

@@ -6,11 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/images/logoNext.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/images/logoNext.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     },
@@ -21,6 +16,18 @@
     },
     "web": {
       "favicon": "./assets/images/log.png"
-    }
+    },
+    "plugins": [
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/logoNext.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "imageWidth": 200
+        }
+      ]
+    ]
   }
 }

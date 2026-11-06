@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: "#000000",
   },
   card: {

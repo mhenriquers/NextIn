@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode, useContext } from "react";
 
-interface ClienteFila {
+export interface ClienteFila {
   id: string;
   nome: string;
   pessoas: number;
@@ -12,6 +12,7 @@ interface ClienteFila {
 
 interface FilaContextType {
   fila: ClienteFila[];
+  atendidosHoje: number;
   adicionarCliente: (cliente: ClienteFila) => void;
   removerCliente: (id: string) => void;
 }
@@ -19,6 +20,7 @@ interface FilaContextType {
 const FilaContext = createContext<FilaContextType | undefined>(undefined);
 
 export function FilaProvider({ children }: { children: ReactNode }) {
+  const [atendidosHoje, setAtendidosHoje] = useState(0);
   const [fila, setFila] = useState<ClienteFila[]>([
     {
       id: "1",
@@ -41,18 +43,24 @@ export function FilaProvider({ children }: { children: ReactNode }) {
   ]);
 
   const adicionarCliente = (cliente: ClienteFila) => {
-    setFila([...fila, cliente]);
+    setFila((atual) => [...atual, cliente]);
   };
 
+  // Remover = cliente foi sentado (atendido)
   const removerCliente = (id: string) => {
-    const novaFila = fila
-      .filter((c) => c.id !== id)
-      .map((c, index) => ({ ...c, posicao: index + 1 }));
-    setFila(novaFila);
+    if (!fila.some((c) => c.id === id)) return;
+    setAtendidosHoje((n) => n + 1);
+    setFila((atual) =>
+      atual
+        .filter((c) => c.id !== id)
+        .map((c, index) => ({ ...c, posicao: index + 1 })),
+    );
   };
 
   return (
-    <FilaContext.Provider value={{ fila, adicionarCliente, removerCliente }}>
+    <FilaContext.Provider
+      value={{ fila, atendidosHoje, adicionarCliente, removerCliente }}
+    >
       {children}
     </FilaContext.Provider>
   );
